@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:background="@color/background"
+              tools:context="${relativePackage}.${activityClass}">
+
+    <com.dd.ShadowLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sl_fillColor="@color/blue"
+            app:sl_shadowRadius="4dp"
+            app:sl_shadowColor="@color/shadow"
+            app:sl_dx="0dp"
+            app:sl_dy="0dp"
+            app:sl_cornerRadius="56dp">
+
+        <ImageButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_add_white"
+                android:background="@drawable/fab_selector"
+                tools:ignore="ContentDescription"/>
+
+    </com.dd.ShadowLayout>
+
+    <com.dd.ShadowLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sl_fillColor="@color/blue"
+            app:sl_shadowRadius="4dp"
+            app:sl_shadowColor="@color/shadow"
+            app:sl_dx="2dp"
+            app:sl_dy="2dp"
+            app:sl_cornerRadius="56dp">
+
+        <ImageButton
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_add_white"
+                android:background="@drawable/fab_selector"
+                tools:ignore="ContentDescription"/>
+
+    </com.dd.ShadowLayout>
+
+    <com.dd.ShadowLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sl_cornerRadius="2dp"
+            app:sl_fillColor="@color/blue"
+            app:sl_shadowColor="@color/shadow">
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="88dp"
+                android:minHeight="36dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:background="@drawable/raised_selector"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:text="@string/Button"/>
+
+    </com.dd.ShadowLayout>
+
+    <com.dd.ShadowLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sl_cornerRadius="2dp"
+            app:sl_dx="2dp"
+            app:sl_dy="2dp"
+            app:sl_fillColor="@color/blue"
+            app:sl_shadowColor="@color/shadow">
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="88dp"
+                android:minHeight="36dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:background="@drawable/raised_selector"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:text="@string/Button"/>
+
+    </com.dd.ShadowLayout>
+
+</LinearLayout>
