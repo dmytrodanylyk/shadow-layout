@@ -1,4 +1,4 @@
-### Description
+### Description ![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.dmytrodanylyk.shadow-layout/library/badge.png?style=flat)
 
 Android Shadow Layout
 
@@ -6,9 +6,9 @@ Android Shadow Layout
 
 ### Wiki
 
-- Home
-- Screenshots
-- User Guide
+- Home (*In Progress**)
+- Screenshots (*In Progress*)
+- User Guide (*In Progress*)
 
 ### Integration
 
@@ -26,11 +26,11 @@ If you want to contribute to this library make sure you send pull request to **d
 
 ### Used By
 
-// TODO
+(*In Progress*)
 
 ### Sample
 
-// TODO
+(*In Progress*)
 
 ### License
 
@@ -58,3 +58,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 [Gradle, Please]:http://gradleplease.appspot.com/
+
+[![Analytics](https://ga-beacon.appspot.com/UA-44382495-6/shadow-layout/readme)](https://github.com/igrigorik/ga-beacon)
