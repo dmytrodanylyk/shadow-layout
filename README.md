@@ -1,8 +1,8 @@
 ### Description ![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.dmytrodanylyk.shadow-layout/library/badge.png?style=flat)
 
-Android Shadow Layout - because `CardView` is not enough. [Why?] (https://github.com/dmytrodanylyk/shadow-layout/wiki#why-this-library-was-created)
-
 ![](screenshots/intro.png)
+
+Android Shadow Layout - because `CardView` is not enough. [Why?] (https://github.com/dmytrodanylyk/shadow-layout/wiki#why-this-library-was-created)
 
 ### Wiki
 
