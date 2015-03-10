@@ -9,6 +9,11 @@ Android Shadow Layout - because `CardView` is not enough. [Why?] (https://github
 - [Home] (https://github.com/dmytrodanylyk/shadow-layout/wiki)
 - [User Guide](https://github.com/dmytrodanylyk/shadow-layout/wiki/User-Guide)
 
+### TODO
+
+- Lift on touch
+- Preview shadow position
+
 ### Integration
 
 The lib is available on Maven Central, you can find it with [Gradle, please]
