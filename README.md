@@ -1,14 +1,13 @@
 ### Description ![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.dmytrodanylyk.shadow-layout/library/badge.png?style=flat)
 
-Android Shadow Layout
+Android Shadow Layout - because `CardView` is not enough. [Why?] (https://github.com/dmytrodanylyk/shadow-layout/wiki#why-this-library-was-created)
 
 ![](screenshots/intro.png)
 
 ### Wiki
 
-- Home (*In Progress**)
-- Screenshots (*In Progress*)
-- User Guide (*In Progress*)
+- [Home] (https://github.com/dmytrodanylyk/shadow-layout/wiki)
+- [User Guide](https://github.com/dmytrodanylyk/shadow-layout/wiki/User-Guide)
 
 ### Integration
 
@@ -16,7 +15,7 @@ The lib is available on Maven Central, you can find it with [Gradle, please]
 
 ```
 dependencies {
-    compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.0'
+    compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.1'
 }
 ```
 
@@ -25,10 +24,6 @@ dependencies {
 If you want to contribute to this library make sure you send pull request to **dev** branch.
 
 ### Used By
-
-(*In Progress*)
-
-### Sample
 
 (*In Progress*)
 

@@ -36,7 +36,9 @@ public class ShadowLayout extends FrameLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        setBackgroundCompat(w, h);
+        if(w > 0 && h > 0) {
+            setBackgroundCompat(w, h);
+        }
     }
 
     private void initView(Context context, AttributeSet attrs) {
