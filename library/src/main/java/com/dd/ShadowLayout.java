@@ -11,7 +11,6 @@ import com.dd.shadow.layout.R;
 
 public class ShadowLayout extends FrameLayout {
 
-    private int mFillColor;
     private int mShadowColor;
     private float mShadowRadius;
     private float mCornerRadius;
@@ -51,7 +50,7 @@ public class ShadowLayout extends FrameLayout {
 
     @SuppressWarnings("deprecation")
     private void setBackgroundCompat(int w, int h) {
-        Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, mFillColor);
+        Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, Color.TRANSPARENT);
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
             setBackgroundDrawable(drawable);
@@ -73,7 +72,6 @@ public class ShadowLayout extends FrameLayout {
             mDx = attr.getDimension(R.styleable.ShadowLayout_sl_dx, 0);
             mDy = attr.getDimension(R.styleable.ShadowLayout_sl_dy, 0);
             mShadowColor = attr.getColor(R.styleable.ShadowLayout_sl_shadowColor, getResources().getColor(R.color.default_shadow_color));
-            mFillColor = attr.getColor(R.styleable.ShadowLayout_sl_fillColor, getResources().getColor(R.color.default_fill_color));
         } finally {
             attr.recycle();
         }
@@ -86,7 +84,7 @@ public class ShadowLayout extends FrameLayout {
     private Bitmap createShadowBitmap(int shadowWidth, int shadowHeight, float cornerRadius, float shadowRadius,
                                       float dx, float dy, int shadowColor, int fillColor) {
 
-        Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ARGB_8888);
+        Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ALPHA_8);
         Canvas canvas = new Canvas(output);
 
         RectF shadowRect = new RectF(

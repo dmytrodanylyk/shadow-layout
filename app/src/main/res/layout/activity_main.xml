@@ -12,7 +12,6 @@
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:sl_fillColor="@color/blue"
             app:sl_shadowRadius="4dp"
             app:sl_shadowColor="@color/shadow"
             app:sl_dx="0dp"
@@ -32,7 +31,6 @@
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:sl_fillColor="@color/blue"
             app:sl_shadowRadius="4dp"
             app:sl_shadowColor="@color/shadow"
             app:sl_dx="2dp"
@@ -53,7 +51,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:sl_cornerRadius="2dp"
-            app:sl_fillColor="@color/blue"
             app:sl_shadowColor="@color/shadow">
 
         <Button
@@ -76,7 +73,6 @@
             app:sl_cornerRadius="2dp"
             app:sl_dx="2dp"
             app:sl_dy="2dp"
-            app:sl_fillColor="@color/blue"
             app:sl_shadowColor="@color/shadow">
 
         <Button
