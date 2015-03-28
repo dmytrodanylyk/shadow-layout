@@ -122,4 +122,14 @@ public class ShadowLayout extends FrameLayout {
 
         return output;
     }
+
+    @Override
+    protected int getSuggestedMinimumWidth() {
+        return 0;
+    }
+
+    @Override
+    protected int getSuggestedMinimumHeight() {
+        return 0;
+    }
 }
