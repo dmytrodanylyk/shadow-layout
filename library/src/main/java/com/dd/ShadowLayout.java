@@ -36,6 +36,16 @@ public class ShadowLayout extends FrameLayout {
     }
 
     @Override
+    protected int getSuggestedMinimumWidth() {
+        return 0;
+    }
+
+    @Override
+    protected int getSuggestedMinimumHeight() {
+        return 0;
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if(w > 0 && h > 0 && (getBackground() == null || mInvalidateShadowOnSizeChanged || mForceInvalidateShadow)) {
@@ -49,8 +59,18 @@ public class ShadowLayout extends FrameLayout {
         super.onLayout(changed, left, top, right, bottom);
         if (mForceInvalidateShadow) {
             mForceInvalidateShadow = false;
-            setBackgroundCompat(right-left, bottom-top);
+            setBackgroundCompat(right - left, bottom - top);
         }
+    }
+
+    public void setInvalidateShadowOnSizeChanged(boolean invalidateShadowOnSizeChanged) {
+        mInvalidateShadowOnSizeChanged = invalidateShadowOnSizeChanged;
+    }
+
+    public void invalidateShadow() {
+        mForceInvalidateShadow = true;
+        requestLayout();
+        invalidate();
     }
 
     private void initView(Context context, AttributeSet attrs) {
@@ -136,23 +156,4 @@ public class ShadowLayout extends FrameLayout {
         return output;
     }
 
-    @Override
-    protected int getSuggestedMinimumWidth() {
-        return 0;
-    }
-
-    @Override
-    protected int getSuggestedMinimumHeight() {
-        return 0;
-    }
-
-    public void setInvalidateShadowOnSizeChanged(boolean invalidateShadowOnSizeChanged) {
-        this.mInvalidateShadowOnSizeChanged = invalidateShadowOnSizeChanged;
-    }
-
-    public void invalidateShadow() {
-        this.mForceInvalidateShadow = true;
-        requestLayout();
-        invalidate();
-    }
 }

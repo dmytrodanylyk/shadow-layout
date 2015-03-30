@@ -20,7 +20,7 @@ The lib is available on Maven Central, you can find it with [Gradle, please]
 
 ```
 dependencies {
-    compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.2'
+    compile 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
 }
 ```
 
