@@ -32,7 +32,7 @@ public class ShadowLayout extends FrameLayout {
 
     public ShadowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context, attrs);
+        initView(context, attrs, defStyleAttr);
     }
 
     @Override
@@ -74,8 +74,16 @@ public class ShadowLayout extends FrameLayout {
     }
 
     private void initView(Context context, AttributeSet attrs) {
-        initAttributes(context, attrs);
+        initAttributes(context, attrs, 0);
+        initView(context);
+    }
 
+    private void initView(Context context, AttributeSet attrs, int defStyledRes) {
+        initAttributes(context, attrs, defStyledRes);
+        initView(context);
+    }
+
+    private void initView(Context context){
         int xPadding = (int) (mShadowRadius + Math.abs(mDx));
         int yPadding = (int) (mShadowRadius + Math.abs(mDy));
         setPadding(xPadding, yPadding, xPadding, yPadding);
@@ -93,8 +101,12 @@ public class ShadowLayout extends FrameLayout {
     }
 
 
-    private void initAttributes(Context context, AttributeSet attrs) {
-        TypedArray attr = getTypedArray(context, attrs, R.styleable.ShadowLayout);
+    private void initAttributes(Context context, AttributeSet attrs, int defStyleRes) {
+        TypedArray attr = getTypedArray(context, attrs, R.styleable.ShadowLayout, defStyleRes);
+        initAttributes(context, attr);
+    }
+
+    private void initAttributes(Context context, TypedArray attr){
         if (attr == null) {
             return;
         }
@@ -110,8 +122,8 @@ public class ShadowLayout extends FrameLayout {
         }
     }
 
-    private TypedArray getTypedArray(Context context, AttributeSet attributeSet, int[] attr) {
-        return context.obtainStyledAttributes(attributeSet, attr, 0, 0);
+    private TypedArray getTypedArray(Context context, AttributeSet attributeSet, int[] attr, int defStyleRes) {
+        return context.obtainStyledAttributes(attributeSet, attr, 0, defStyleRes);
     }
 
     private Bitmap createShadowBitmap(int shadowWidth, int shadowHeight, float cornerRadius, float shadowRadius,
