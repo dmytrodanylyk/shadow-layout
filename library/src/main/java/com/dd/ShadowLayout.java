@@ -26,24 +26,24 @@ public class ShadowLayout extends FrameLayout {
 
     public ShadowLayout(Context context) {
         super(context);
-        initView(context, null);
+        initView(context, null, 0);
     }
 
     public ShadowLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context, attrs);
+        initView(context, attrs, 0);
     }
 
     public ShadowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context, attrs);
+        initView(context, attrs, defStyleAttr);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public ShadowLayout(final Context context, final AttributeSet attrs, final int defStyleAttr,
             final int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initView(context, attrs);
+        initView(context, attrs, defStyleRes);
     }
 
     @Override
@@ -84,8 +84,8 @@ public class ShadowLayout extends FrameLayout {
         invalidate();
     }
 
-    private void initView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        initAttributes(context, attrs);
+    private void initView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyledRes) {
+        initAttributes(context, attrs, defStyledRes);
 
         final int xPadding = (int) (mShadowRadius + Math.abs(mDx));
         final int yPadding = (int) (mShadowRadius + Math.abs(mDy));
@@ -105,11 +105,11 @@ public class ShadowLayout extends FrameLayout {
     }
 
 
-    private void initAttributes(@NonNull Context context, @Nullable AttributeSet attrs) {
+    private void initAttributes(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleRes) {
         if (attrs == null) {
             return;
         }
-        final TypedArray attr = getTypedArray(context, attrs, R.styleable.ShadowLayout);
+        final TypedArray attr = getTypedArray(context, attrs, R.styleable.ShadowLayout, defStyleRes);
 
         try {
             mCornerRadius = attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius, getResources().getDimension(R.dimen.default_corner_radius));
@@ -124,8 +124,8 @@ public class ShadowLayout extends FrameLayout {
 
     @NonNull
     private TypedArray getTypedArray(@NonNull Context context, @NonNull AttributeSet attributeSet,
-            @NonNull int[] attr) {
-        return context.obtainStyledAttributes(attributeSet, attr, 0, 0);
+            @NonNull int[] attr, int defStyleRes) {
+        return context.obtainStyledAttributes(attributeSet, attr, 0, defStyleRes);
     }
 
     @NonNull
