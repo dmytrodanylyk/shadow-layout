@@ -25,7 +25,7 @@ public class ShadowLayout extends FrameLayout {
     private float mCornerRadius;
     private float mDx;
     private float mDy;
-
+    private boolean mRound;
     private boolean mInvalidateShadowOnSizeChanged = true;
     private boolean mForceInvalidateShadow = false;
 
@@ -121,9 +121,10 @@ public class ShadowLayout extends FrameLayout {
         try {
             mCornerRadius = attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius, getResources().getDimension(R.dimen.default_corner_radius));
             mShadowRadius = attr.getDimension(R.styleable.ShadowLayout_sl_shadowRadius, getResources().getDimension(R.dimen.default_shadow_radius));
+            mShadowColor = attr.getColor(R.styleable.ShadowLayout_sl_shadowColor, getResources().getColor(R.color.default_shadow_color));
             mDx = attr.getDimension(R.styleable.ShadowLayout_sl_dx, 0);
             mDy = attr.getDimension(R.styleable.ShadowLayout_sl_dy, 0);
-            mShadowColor = attr.getColor(R.styleable.ShadowLayout_sl_shadowColor, getResources().getColor(R.color.default_shadow_color));
+            mRound = attr.getBoolean(R.styleable.ShadowLayout_sl_round, false);
         } finally {
             attr.recycle();
         }
@@ -173,8 +174,11 @@ public class ShadowLayout extends FrameLayout {
             shadowPaint.setShadowLayer(shadowRadius, dx, dy, shadowColor);
         }
 
-        canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
-
+        if (!mRound) {
+            canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
+        } else {
+            canvas.drawOval(shadowRect, shadowPaint);
+        }
         return output;
     }
 
@@ -202,6 +206,7 @@ public class ShadowLayout extends FrameLayout {
     }
 
     public void setCornerRadius(float cornerRadius) {
+        this.mRound = false; //if user decides to change cornerRadius, we no longer perceive shadow layout as round
         this.mCornerRadius = cornerRadius;
         invalidateShadow();
     }
@@ -223,6 +228,15 @@ public class ShadowLayout extends FrameLayout {
     public void setDy(float dy) {
         this.mDy = dy;
         setShadowPadding();
+        invalidateShadow();
+    }
+
+    public boolean isRound() {
+        return mRound;
+    }
+
+    public void setRound(boolean round) {
+        this.mRound = round;
         invalidateShadow();
     }
 }
