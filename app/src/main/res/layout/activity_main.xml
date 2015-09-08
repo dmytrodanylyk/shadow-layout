@@ -16,7 +16,7 @@
             app:sl_shadowColor="@color/shadow"
             app:sl_dx="0dp"
             app:sl_dy="0dp"
-            app:sl_cornerRadius="56dp">
+            app:sl_round="true">
 
         <ImageButton
                 android:layout_width="56dp"

@@ -4,13 +4,18 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+
 import com.dd.shadow.layout.R;
 
 public class ShadowLayout extends FrameLayout {
@@ -20,7 +25,7 @@ public class ShadowLayout extends FrameLayout {
     private float mCornerRadius;
     private float mDx;
     private float mDy;
-
+    private boolean mRound;
     private boolean mInvalidateShadowOnSizeChanged = true;
     private boolean mForceInvalidateShadow = false;
 
@@ -41,7 +46,7 @@ public class ShadowLayout extends FrameLayout {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public ShadowLayout(final Context context, final AttributeSet attrs, final int defStyleAttr,
-            final int defStyleRes) {
+                        final int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView(context, attrs, defStyleRes);
     }
@@ -59,7 +64,7 @@ public class ShadowLayout extends FrameLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        if(w > 0 && h > 0 && (getBackground() == null || mInvalidateShadowOnSizeChanged || mForceInvalidateShadow)) {
+        if (w > 0 && h > 0 && (getBackground() == null || mInvalidateShadowOnSizeChanged || mForceInvalidateShadow)) {
             mForceInvalidateShadow = false;
             setBackgroundCompat(w, h);
         }
@@ -86,7 +91,10 @@ public class ShadowLayout extends FrameLayout {
 
     private void initView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyledRes) {
         initAttributes(context, attrs, defStyledRes);
+        setShadowPadding();
+    }
 
+    private void setShadowPadding() {
         final int xPadding = (int) (mShadowRadius + Math.abs(mDx));
         final int yPadding = (int) (mShadowRadius + Math.abs(mDy));
         setPadding(xPadding, yPadding, xPadding, yPadding);
@@ -104,7 +112,6 @@ public class ShadowLayout extends FrameLayout {
         }
     }
 
-
     private void initAttributes(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleRes) {
         if (attrs == null) {
             return;
@@ -114,9 +121,10 @@ public class ShadowLayout extends FrameLayout {
         try {
             mCornerRadius = attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius, getResources().getDimension(R.dimen.default_corner_radius));
             mShadowRadius = attr.getDimension(R.styleable.ShadowLayout_sl_shadowRadius, getResources().getDimension(R.dimen.default_shadow_radius));
+            mShadowColor = attr.getColor(R.styleable.ShadowLayout_sl_shadowColor, getResources().getColor(R.color.default_shadow_color));
             mDx = attr.getDimension(R.styleable.ShadowLayout_sl_dx, 0);
             mDy = attr.getDimension(R.styleable.ShadowLayout_sl_dy, 0);
-            mShadowColor = attr.getColor(R.styleable.ShadowLayout_sl_shadowColor, getResources().getColor(R.color.default_shadow_color));
+            mRound = attr.getBoolean(R.styleable.ShadowLayout_sl_round, false);
         } finally {
             attr.recycle();
         }
@@ -124,13 +132,13 @@ public class ShadowLayout extends FrameLayout {
 
     @NonNull
     private TypedArray getTypedArray(@NonNull Context context, @NonNull AttributeSet attributeSet,
-            @NonNull int[] attr, int defStyleRes) {
+                                     @NonNull int[] attr, int defStyleRes) {
         return context.obtainStyledAttributes(attributeSet, attr, 0, defStyleRes);
     }
 
     @NonNull
     private Bitmap createShadowBitmap(int shadowWidth, int shadowHeight, float cornerRadius, float shadowRadius,
-            float dx, float dy, int shadowColor, int fillColor) {
+                                      float dx, float dy, int shadowColor, int fillColor) {
 
         Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ALPHA_8);
         Canvas canvas = new Canvas(output);
@@ -166,8 +174,69 @@ public class ShadowLayout extends FrameLayout {
             shadowPaint.setShadowLayer(shadowRadius, dx, dy, shadowColor);
         }
 
-        canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
-
+        if (!mRound) {
+            canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
+        } else {
+            canvas.drawOval(shadowRect, shadowPaint);
+        }
         return output;
+    }
+
+    public int getShadowColor() {
+        return mShadowColor;
+    }
+
+    public void setShadowColor(int shadowColor) {
+        this.mShadowColor = shadowColor;
+        invalidateShadow();
+    }
+
+    public float getShadowRadius() {
+        return mShadowRadius;
+    }
+
+    public void setShadowRadius(float shadowRadius) {
+        this.mShadowRadius = shadowRadius;
+        setShadowPadding();
+        invalidateShadow();
+    }
+
+    public float getCornerRadius() {
+        return mCornerRadius;
+    }
+
+    public void setCornerRadius(float cornerRadius) {
+        this.mRound = false; //if user decides to change cornerRadius, we no longer perceive shadow layout as round
+        this.mCornerRadius = cornerRadius;
+        invalidateShadow();
+    }
+
+    public float getDx() {
+        return mDx;
+    }
+
+    public void setDx(float dx) {
+        this.mDx = dx;
+        setShadowPadding();
+        invalidateShadow();
+    }
+
+    public float getDy() {
+        return mDy;
+    }
+
+    public void setDy(float dy) {
+        this.mDy = dy;
+        setShadowPadding();
+        invalidateShadow();
+    }
+
+    public boolean isRound() {
+        return mRound;
+    }
+
+    public void setRound(boolean round) {
+        this.mRound = round;
+        invalidateShadow();
     }
 }
