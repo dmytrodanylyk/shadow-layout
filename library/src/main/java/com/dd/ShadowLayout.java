@@ -22,16 +22,19 @@ public class ShadowLayout extends FrameLayout {
 
     public ShadowLayout(Context context) {
         super(context);
+        if(isInEditMode()) return;
         initView(context, null);
     }
 
     public ShadowLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        if(isInEditMode()) return;
         initView(context, attrs);
     }
 
     public ShadowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        if(isInEditMode()) return;
         initView(context, attrs);
     }
 
