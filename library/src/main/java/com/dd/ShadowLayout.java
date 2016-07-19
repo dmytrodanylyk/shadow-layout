@@ -1,10 +1,14 @@
 package com.dd;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.*;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import com.dd.shadow.layout.R;
@@ -22,17 +26,24 @@ public class ShadowLayout extends FrameLayout {
 
     public ShadowLayout(Context context) {
         super(context);
-        initView(context, null);
+        initView(context, null, 0);
     }
 
     public ShadowLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context, attrs);
+        initView(context, attrs, 0);
     }
 
     public ShadowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context, attrs);
+        initView(context, attrs, defStyleAttr);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public ShadowLayout(final Context context, final AttributeSet attrs, final int defStyleAttr,
+            final int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        initView(context, attrs, defStyleRes);
     }
 
     @Override
@@ -73,31 +84,32 @@ public class ShadowLayout extends FrameLayout {
         invalidate();
     }
 
-    private void initView(Context context, AttributeSet attrs) {
-        initAttributes(context, attrs);
+    private void initView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyledRes) {
+        initAttributes(context, attrs, defStyledRes);
 
-        int xPadding = (int) (mShadowRadius + Math.abs(mDx));
-        int yPadding = (int) (mShadowRadius + Math.abs(mDy));
+        final int xPadding = (int) (mShadowRadius + Math.abs(mDx));
+        final int yPadding = (int) (mShadowRadius + Math.abs(mDy));
         setPadding(xPadding, yPadding, xPadding, yPadding);
     }
 
+    @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
     private void setBackgroundCompat(int w, int h) {
         Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, Color.TRANSPARENT);
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackgroundDrawable(drawable);
-        } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             setBackground(drawable);
+        } else {
+            setBackgroundDrawable(drawable);
         }
     }
 
 
-    private void initAttributes(Context context, AttributeSet attrs) {
-        TypedArray attr = getTypedArray(context, attrs, R.styleable.ShadowLayout);
-        if (attr == null) {
+    private void initAttributes(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleRes) {
+        if (attrs == null) {
             return;
         }
+        final TypedArray attr = getTypedArray(context, attrs, R.styleable.ShadowLayout, defStyleRes);
 
         try {
             mCornerRadius = attr.getDimension(R.styleable.ShadowLayout_sl_cornerRadius, getResources().getDimension(R.dimen.default_corner_radius));
@@ -110,12 +122,15 @@ public class ShadowLayout extends FrameLayout {
         }
     }
 
-    private TypedArray getTypedArray(Context context, AttributeSet attributeSet, int[] attr) {
-        return context.obtainStyledAttributes(attributeSet, attr, 0, 0);
+    @NonNull
+    private TypedArray getTypedArray(@NonNull Context context, @NonNull AttributeSet attributeSet,
+            @NonNull int[] attr, int defStyleRes) {
+        return context.obtainStyledAttributes(attributeSet, attr, 0, defStyleRes);
     }
 
+    @NonNull
     private Bitmap createShadowBitmap(int shadowWidth, int shadowHeight, float cornerRadius, float shadowRadius,
-                                      float dx, float dy, int shadowColor, int fillColor) {
+            float dx, float dy, int shadowColor, int fillColor) {
 
         Bitmap output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ALPHA_8);
         Canvas canvas = new Canvas(output);
@@ -155,5 +170,4 @@ public class ShadowLayout extends FrameLayout {
 
         return output;
     }
-
 }
