@@ -89,7 +89,7 @@ public class ShadowLayout extends FrameLayout {
             return;
         }
 
-        Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, Color.TRANSPARENT);
+        Bitmap bitmap = createShadowBitmap(w, h, mCornerRadius, mShadowRadius, mDx, mDy, mShadowColor, mShadowColor);
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
             setBackgroundDrawable(drawable);
