@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:gravity="center"
-              android:background="@color/background"
+              android:background="@color/gray_background"
               tools:context="${relativePackage}.${activityClass}">
 
     <com.dd.ShadowLayout
@@ -73,7 +73,7 @@
             app:sl_cornerRadius="2dp"
             app:sl_dx="2dp"
             app:sl_dy="2dp"
-            app:sl_shadowColor="@color/shadow">
+            app:sl_shadowColor="@color/orange">
 
         <Button
                 android:layout_width="wrap_content"
