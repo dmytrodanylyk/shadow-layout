@@ -2,6 +2,8 @@
 <resources>
     <color name="blue_dark">#ff1976d1</color>
     <color name="blue">#ff2195f2</color>
+    <color name="orange">#ffff9800</color>
     <color name="background">#ff333333</color>
+    <color name="gray_background">#ccc</color>
     <color name="shadow">#AA000000</color>
 </resources>
