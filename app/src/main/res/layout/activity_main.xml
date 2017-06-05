@@ -5,7 +5,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:gravity="center"
-              android:background="@color/background"
+              android:background="@color/gray_background"
               tools:context="${relativePackage}.${activityClass}">
 
     <com.dd.ShadowLayout
@@ -85,6 +85,26 @@
                 android:background="@drawable/raised_selector"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
                 android:text="@string/Button"/>
+
+    </com.dd.ShadowLayout>
+
+    <com.dd.ShadowLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:sl_cornerRadius="2dp"
+        app:sl_shadowColor="@color/orange">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="88dp"
+            android:minHeight="36dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/raised_selector"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:text="@string/Button"/>
 
     </com.dd.ShadowLayout>
 
