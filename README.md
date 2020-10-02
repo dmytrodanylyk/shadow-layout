@@ -1,6 +1,6 @@
 :small_red_triangle: **Before using this library, read information below** :small_red_triangle:
 ```
-This library is not more supported. 
+This library is no more supported. 
 If you want to add new feature or fix a bug, grab source code and do it. If you think your
 fix or feature would be useful to other developers, I can add link of your repository to
 this README file. Use following e-mail to contact me: dmytrodanylyk@gmail.com
